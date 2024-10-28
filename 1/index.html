@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmojiBuy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>EmojiBuy</h1>
+    <div class="emoji-grid" id="emoji-grid">
+      <!-- Emojis will be injected here dynamically -->
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content">
+      <h2>Checkout</h2>
+      <div id="selected-emojis"></div>
+      <label for="solana-amount">Total Solana to spend:</label>
+      <input type="range" id="solana-amount" min="0" max="100" value="50" oninput="updateSliderValue(this.value)">
+      <span id="slider-value">50</span> SOL
+      <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

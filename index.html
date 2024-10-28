@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmojiBuy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>EmojiBuy</h1>
+    
+    <!-- Category: Sub $500K -->
+    <div class="category">
+      <h2>Sub $500K</h2>
+      <div class="emoji-grid" id="emoji-grid-500k">
+        <!-- Emojis for this category will be injected here -->
+      </div>
+    </div>
+
+    <!-- Category: Sub $100K -->
+    <div class="category">
+      <h2>Sub $100K</h2>
+      <div class="emoji-grid" id="emoji-grid-100k">
+        <!-- Emojis for this category will be injected here -->
+      </div>
+    </div>
+
+    <!-- Category: Sub $50K -->
+    <div class="category">
+      <h2>Sub $50K</h2>
+      <div class="emoji-grid" id="emoji-grid-50k">
+        <!-- Emojis for this category will be injected here -->
+      </div>
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content">
+      <h2>Checkout</h2>
+      <div id="selected-emojis"></div>
+      <div id="emoji-allocation">
+        <!-- This will show the amount of each emoji the user gets -->
+      </div>
+      <label for="solana-amount">Total Solana to spend:</label>
+      <input type="range" id="solana-amount" min="0" max="100" value="50" oninput="updateSliderValue(this.value)">
+      <span id="slider-value">50</span> SOL
+
+     
+
+      <div id="qr-code-container">
+        <!-- QR code will be shown here -->
+      </div>
+
+      <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

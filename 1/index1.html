@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmojiBuy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .emoji-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 50px);
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .emoji {
+      font-size: 2rem;
+      padding: 10px;
+      border: 3px solid red;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .emoji.selected {
+      border-color: green;
+    }
+
+    .cart {
+      margin-top: 20px;
+    }
+
+    .slider {
+      margin-top: 10px;
+    }
+
+    .checkout-list {
+      margin-top: 20px;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>EmojiBuy</h1>
+
+  <div class="emoji-grid">
+    <div class="emoji">🍎</div>
+    <div class="emoji">🍇</div>
+    <div class="emoji">🍉</div>
+    <div class="emoji">🍓</div>
+    <div class="emoji">🍌</div>
+    <div class="emoji">🍍</div>
+    <div class="emoji">🥑</div>
+    <div class="emoji">🍆</div>
+    <div class="emoji">🍒</div>
+    <div class="emoji">🍑</div>
+  </div>
+
+  <button id="checkout-btn">Checkout</button>
+
+  <div class="cart">
+    <h2>Selected Emojis</h2>
+    <div class="checkout-list" id="checkout-list"></div>
+    <div class="slider">
+      <label for="solana-slider">Spend Solana: </label>
+      <input type="range" id="solana-slider" min="1" max="100" value="10">
+      <span id="solana-amount">10</span> SOL
+    </div>
+  </div>
+
+  <script>
+    const emojis = document.querySelectorAll('.emoji');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutList = document.getElementById('checkout-list');
+    const solanaSlider = document.getElementById('solana-slider');
+    const solanaAmount = document.getElementById('solana-amount');
+    let selectedEmojis = [];
+
+    // Toggle emoji selection on click
+    emojis.forEach(emoji => {
+      emoji.addEventListener('click', () => {
+        emoji.classList.toggle('selected');
+        const emojiChar = emoji.textContent;
+
+        if (emoji.classList.contains('selected')) {
+          selectedEmojis.push(emojiChar);
+        } else {
+          selectedEmojis = selectedEmojis.filter(e => e !== emojiChar);
+        }
+      });
+    });
+
+    // Update Solana amount on slider change
+    solanaSlider.addEventListener('input', (event) => {
+      solanaAmount.textContent = event.target.value;
+    });
+
+    // Checkout button event
+    checkoutBtn.addEventListener('click', () => {
+      checkoutList.innerHTML = '';
+      if (selectedEmojis.length === 0) {
+        checkoutList.textContent = 'No emojis selected!';
+        return;
+      }
+
+      const solanaToSpend = parseInt(solanaAmount.textContent);
+      const solanaPerEmoji = (solanaToSpend / selectedEmojis.length).toFixed(2);
+
+      selectedEmojis.forEach(emoji => {
+        const emojiItem = document.createElement('div');
+        emojiItem.textContent = `${emoji} - ${solanaPerEmoji} SOL`;
+        checkoutList.appendChild(emojiItem);
+      });
+    });
+  </script>
+</body>
+</html>
